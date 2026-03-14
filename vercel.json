@@ -1,0 +1,5 @@
+{
+  "routes": [
+    { "src": "/", "dest": "/thulirdhara_v2.html" }
+  ]
+}

@@ -1,0 +1,1661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ThulirDhara — Growing Nature, Empowering Agriculture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://db.onlinewebfonts.com/c/278cd2813d9b0fa774ee099292e499be?family=Megante" rel="stylesheet">
+<link rel="shortcut icon" href="favicon.ico">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --c1:#f2b75ff2;
+  --c2:#10383A;
+  --c3:#1C8585;
+  --c4:#F1FAEE;
+  --white:#f0faf7;
+  --white2:#a8d4c8;
+  --muted:#5a8c82;
+  --border:rgba(29,162,126,0.2);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;background:var(--c1);color:var(--white);overflow-x:hidden}
+h1,h2,h3,h4{font-family:'Bodoni Moda',serif}
+/* ::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--c1)}
+::-webkit-scrollbar-thumb{background:var(--c4);border-radius:3px} */
+
+/* ═══════════════════════════════════════
+   SPLASH SCREEN
+═══════════════════════════════════════ */
+#splash {
+background-image: url('images/green.jpg');
+  background-blend-mode: color-burn;
+  opacity: 1;
+  /* -webkit-backdrop-filter:blur(90px); */
+  background-size: cover;
+  position: fixed;
+  inset: 0;
+  z-index: 6; 
+   /* background: radial-gradient(ellipse at 40% 40%, #0a2e1a 0%, #051510 40%, #020a06 100%);  */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 1600px;
+  height: 800px;
+  background-repeat: no-repeat;
+  justify-content: center;
+  gap: 1.2rem;
+  overflow: hidden;
+}
+
+/* Animated bokeh particles on splash */
+#splash::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 30%, rgba(29,162,126,.18) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 30% 70%, rgba(28,133,133,.1) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.splash-logo-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .5rem;
+  /* This element animates to header position on enter */
+  transition: none;
+}
+
+.splash-logo-img {
+  width: 400px;
+  height: 400px;
+  object-fit: contain;
+  animation: splashFloat 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 40px rgba(29,162,126,.6));
+}
+
+@keyframes splashFloat {
+  0%,100% { transform: translateY(0) scale(1); }
+  50%      { transform: translateY(-18px) scale(1.03); }
+}
+
+.splash-name {
+  font-family: 'Megante', 'Bodoni Moda', serif;
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #10383ae0;
+  letter-spacing: .08em;
+  text-align: center;
+  opacity: 1;
+  transition: opacity .5s ease;
+  text-shadow: 0 0 40px rgba(29,162,126,.4);
+}
+
+.splash-tagline {
+  font-size: 1.4rem;
+  color: rgba(120, 184, 167, 0.988);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  opacity: 1;
+  transition: opacity .5s ease;
+}
+
+.splash-enter-btn {
+  padding: .9rem 3.5rem;
+  background: linear-gradient(135deg, #1DA27E, #074047);
+  color: #fff;
+  border: none;
+  border-radius: 40px;
+  font-family: 'Jost', sans-serif;
+  font-size: .95rem;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(29,162,126,.4);
+  transition: transform .3s, box-shadow .3s;
+}
+.splash-enter-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 40px rgba(29,162,126,.55);
+}
+.splash-enter-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,.15), transparent);
+  border-radius: 40px;
+}
+
+/* Shrink & fly animation for the logo */
+.splash-logo-wrap.fly {
+  animation: logoFlyToHeader .75s cubic-bezier(.4,0,.2,1) forwards;
+}
+
+@keyframes logoFlyToHeader {
+  0%   { transform: translate(0, 0) scale(1); opacity: 1; }
+  60%  { opacity: 1; }
+  100% { transform: translate(calc(-50vw + 5rem), calc(-50vh + 3rem)) scale(0.2);
+         opacity: 0; }
+}
+
+/* Fade out the rest of splash content */
+.splash-name.hide, .splash-tagline.hide, .splash-enter-btn.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Full splash fade out */
+#splash.fade-out {
+  animation: splashFadeOut .55s .65s ease forwards;
+}
+@keyframes splashFadeOut {
+  from { opacity: 1; }
+  to   { opacity: 0; pointer-events: none; }
+}
+
+/* ═══════════════════════
+   HEADER
+═══════════════════════ */
+.hdr{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 3.5rem;display:flex;align-items:center;justify-content:space-between;transition:all .4s; opacity: 0;}
+.hdr.solid{backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);box-shadow:0 20px 50px rgba(0,0,0,0.3),inset 0 1px 1px rgba(255,255,255,0.4),inset 0 -1px 1px rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.25);height: 15%;opacity:1;backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+.logo{display:flex;align-items:center;gap:.5rem;cursor:pointer;margin-left:-4rem;margin-top:-2rem;
+  
+   }
+.logo-mark{background:radial-gradient(circle,rgba(80,255,150,0.7) 0%,rgba(0,0,0,0) 70%);width:10rem;height:10rem;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:flex-start; background: radial-gradient(circle, rgba(231, 239, 239, 0.944) 0%, rgba(23, 202, 199, 0.916) 20%, transparent 40%);
+  z-index: 2;transition:transform .4s ease;padding-top:0}
+.logo-mark img{width:100%;height:100%;object-fit:contain}
+.logo:hover .logo-mark{transform:scale(1.1)}
+.logo-name{font-family:'Megante',sans-serif;font-size:1.2rem;font-weight:700;color:var(--c4);letter-spacing:.02em}
+nav{display:flex;align-items:center;gap:2.5rem;margin-top:-4rem}
+.nl{color:#3EB489;font-size:.88rem;font-weight:500;background:none;border:none;cursor:pointer;position:relative;padding-bottom:2px;transition:color .3s;letter-spacing:.06em;text-transform:uppercase}
+.nl::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:rgb(254,255,255);transition:width .3s}
+.nl:hover,.nl.on{color:rgb(250,253,253)}
+.nl:hover::after,.nl.on::after{width:100%}
+.hdr-btn{padding:.55rem 1.4rem;background:var(--c4);color:#222121;border:none;border-radius:3px;font-size:.82rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:all .3s}
+.hdr-btn:hover{background:var(--c3);transform:translateY(-2px)}
+.ham{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:5px}
+.ham span{display:block;width:24px;height:1.5px;background:var(--white);transition:all .3s}
+
+/* ── HERO ── */
+.tree-bg{position:absolute;left:0;bottom:0;height:100%;width:100%;object-fit:cover;object-position:50% 20%;z-index:0}
+.hero{position:relative;height:100vh;background-size:cover;background-position:left;background-repeat:no-repeat;filter:brightness(150%) contrast(105%);display:flex;overflow:hidden;color:#fff}
+.overlay{position:absolute;width:100%;height:100%;background:rgba(0,0,0,0.55);top:0;left:0;z-index:1}
+.hero-container{position:relative;z-index:5;width:100%;display:flex;justify-content:space-between;align-items:center;padding:0 8%}
+.hero-text{max-width:40%;font-size:1.2rem;color: #4bba9a;}
+.hero-text p{position:absolute;line-height:1.6;top:500px;right:900px}
+.hero-image{position:absolute;top:120px;right:150px;z-index:20}
+.hero-image img{width:420px;max-width:100%;animation:floatLogo 5s ease-in-out infinite;filter:brightness(90%) contrast(105%)}
+@keyframes floatLogo{0%{transform:translateY(0)}50%{transform:translateY(-15px)}100%{transform:translateY(0)}}
+.hero-content{position:absolute;bottom:10%;right:7%;max-width:500px;text-align:right;z-index:6}
+.hero-title{font-size:3rem;font-weight:bold;line-height:1.2}
+.gradient-text{font-size: 3rem;background:linear-gradient(to right,#1DA27E,#0c7253);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.text-dark{color:#f3f4f6;font-size: 2.7rem;}
+.hero-para{font-size:1.2rem;margin-top:10px;font-size: 1.2rem;}
+.hero-buttons{margin-top:20px;display:flex;gap:15px;justify-content:flex-end}
+.btn-primary,.btn-secondary{padding:12px 28px;border-radius:30px;font-weight:600;border:none;cursor:pointer;transition:.3s ease}
+.btn-primary{background:linear-gradient(to right,#1DA27E,#0f976c);color:white}
+.btn-secondary{background:rgba(255,255,255,0.2);backdrop-filter:blur(8px);color:white}
+.btn-primary:hover,.btn-secondary:hover{transform:translateY(-5px);box-shadow:0 0 20px #1DA27E}
+.leaves span{position:absolute;width:20px;height:20px;background:#1DA27E;clip-path:ellipse(40% 60% at 50% 50%);animation:floatLeaves 8s linear infinite;opacity:.7}
+@keyframes floatLeaves{0%{transform:translateY(0) rotate(0);opacity:.3}50%{transform:translateY(-40px) rotate(180deg);opacity:1}100%{transform:translateY(0) rotate(360deg);opacity:.3}}
+.stars span {
+  position: absolute;
+  width: 6px; /* Increased slightly to account for clipping */
+  height: 6px;
+  background: #fff;
+  /* Cuts the square into a diamond: top-center, right-center, bottom-center, left-center */
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  box-shadow: 0 0 8px #1DA27E;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@keyframes glow{from{transform:scale(.8);opacity:1}to{transform:scale(1.6);opacity:1}}
+@media(max-width:992px){.hero-container{flex-direction:column;text-align:center}.hero-text{max-width:100%;margin-bottom:30px}.hero-content{position:static;text-align:center;margin-top:30px}.hero-buttons{justify-content:center}}
+
+/* ── REVEAL ANIMATIONS ── */
+.rv{opacity:0;transform:translateY(50px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.rv.on{opacity:1;transform:translateY(0)}
+.rv-l{opacity:0;transform:translateX(-50px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.rv-l.on{opacity:1;transform:translateX(0)}
+.rv-r{opacity:0;transform:translateX(50px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.rv-r.on{opacity:1;transform:translateX(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}.d5{transition-delay:.5s}
+
+/* SECTION */
+.sec{padding:8rem 3.5rem;position:relative}
+.inner{max-width:1280px;margin:0 auto}
+.sec-label{display:inline-flex;align-items:center;gap:.7rem;font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--c4);margin-bottom:1.2rem}
+.sec-label::before{content:'';width:28px;height:1px;background:var(--c4)}
+.sec-title{font-size:clamp(2.4rem,5vw,4rem);font-weight:700;line-height:1.1;color:var(--c4);margin-bottom:1rem}
+.sec-title em{font-style:italic;color:var(--c4)}
+.sec-sub{font-size:1.3rem;color:var(--muted);max-width:480px;line-height:1.8}
+
+/* ═══════════════════════════════════════
+   BACKGROUND IMAGE — all sections after hero
+═══════════════════════════════════════ */
+.bg-section-wrap {
+  position: relative;
+}
+.bg-section-wrap::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+background-image: url('images/bgmain.jpeg');
+  background-size: contain;
+  background-position: center 20%;
+  background-attachment: fixed;
+  z-index: -1;
+  pointer-events: none;
+}
+/* Dark overlay so text stays readable */
+.bg-section-wrap::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 22, 14, 0.72);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Override inline backgrounds inside bg-section-wrap to be transparent */
+.bg-section-wrap .sec,
+.bg-section-wrap section,
+.bg-section-wrap > div {
+  background: transparent !important;
+}
+/* Keep the about header banner slightly dark */
+.about-banner {
+  background: rgba(10, 40, 30, 0.6) !important;
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--border) !important;
+}
+/* Products page banner */
+.prod-banner {
+  background: rgba(10, 40, 30, 0.6) !important;
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--border) !important;
+}
+
+/* MISSION VISION */
+.climber-container{right:10%;position:relative;width:100%;height:100%}
+.climber-img{position:absolute;top:-120%;right:30%;left:0;filter:brightness(70%) contrast(110%);z-index:10}
+#mv{border-top:1px solid var(--border)}
+.mv-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:5rem}
+.mv-card{animation:floatUpAndDown 3s ease-in-out infinite;position:relative;padding:3rem;border-radius:90px;overflow:hidden;transition:all .5s cubic-bezier(.16,1,.3,1);backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);box-shadow:0 20px 50px rgba(0,0,0,0.3),inset 0 1px 1px rgba(255,255,255,0.4),inset 0 -1px 1px rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.25)}
+.mv-card::after{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;transform:rotate(-20deg);transition:all .8s;pointer-events:none}
+.mv-card:hover{transform:translateY(-10px) scale(1.02);background:rgba(255,255,255,0.15);border-color:rgba(255,255,255,0.45)}
+.mv-card:hover::after{left:100%}
+.mv-icon{gap:1.5rem;margin-bottom:1rem;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;font-size:1.6rem}
+.mv-card h3{font-size:1.8rem;font-weight:700;color:var(--white);margin-bottom:1rem}
+.mv-card p{color:white;line-height:1.9;font-size:.95rem}
+.mv-card ul{list-style:none;margin-top:1rem;display:flex;flex-direction:column;gap:.5rem}
+.mv-card ul li{color:white;font-size:1rem;line-height:1.7;display:flex;align-items:flex-start;gap:.7rem}
+.mv-card ul li::before{content:'→';color:var(--c4);flex-shrink:0;margin-top:.1rem}
+.mv-icon img{border-radius:90px;border:2px solid rgb(3,99,62);display:block;height:80px;width:auto}
+.values-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:4rem}
+.val-item,.val-item1,.val-item2,.val-item3,.val-item4{padding:1.8rem 1.5rem;text-align:center;transition:all .4s ease;border-radius:50px;backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);box-shadow:0 20px 50px rgba(0,0,0,0.3),inset 0 1px 1px rgba(255,255,255,0.4),inset 0 -1px 1px rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.25)}
+.val-item1,.val-item3{animation:floatUpAndDown 3s ease-in-out infinite}
+.val-item2,.val-item4{animation:floatUpAndDown 2s ease-in-out infinite}
+.val-item:hover,.val-item1:hover,.val-item2:hover,.val-item3:hover,.val-item4:hover{background:rgba(255,255,255,0.2);transform:translateY(-8px);border-color:rgba(255,255,255,0.5)}
+.val-icon{gap:1.5rem;margin-bottom:1rem;height:60px;border-radius:50%;display:flex;align-items:center;font-size:1.6rem}
+.val-icon img{padding-left: 80px; ;border-radius:90px;display:block;height:80px;width:auto}
+.val-title{font-family:'Bodoni Moda',serif;font-size:1.5rem;font-weight:700;color:var(--c4);margin-bottom:.4rem}
+.val-desc{font-size:.8rem;color:rgba(240,250,247,.8);line-height:1.6}
+@keyframes floatUpAndDown{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
+
+/* PRODUCTS */
+.prod-hdr{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3.5rem}
+.prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.prod-card{display:flex;flex-direction:column;min-height:380px;background:rgba(10, 47, 37, 0.75);border:1px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer;transition:all .5s cubic-bezier(.16,1,.3,1);position:relative;backdrop-filter:blur(8px)}
+.prod-card:hover{transform:translateY(-8px);border-color:rgba(235, 242, 240, 0.953);box-shadow:0 25px 50px rgba(10, 122, 98, 0.84)}
+.prod-img{display:flex;align-items:center;justify-content:center;height:160px;background:rgba(255,255,255,0.03);border-radius:12px 12px 0 0;margin:-1rem -1.5rem 1rem -1.5rem;}
+.prod-img::after{content:'';position:absolute;inset:0;} 
+.prod-ing{max-width:90%;max-height:120px;object-fit:contain;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.2);}
+.prod-badge{position:absolute;top:1rem;left:1rem;background:var(--c4);color:#114831;font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.25rem .7rem;border-radius:2px;z-index:2}
+.prod-body{padding:1.5rem;flex:1;display:flex;flex-direction:column;}
+.prod-name{font-family:'Bodoni Moda',serif;font-size:1.3rem;font-weight:700;color:var(--c4);margin-bottom:.4rem}
+.prod-desc{font-size:.85rem;color:var(--muted);line-height:1.6;margin-bottom:1.2rem}
+.prod-foot{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);padding-top:1.2rem}
+.prod-price{font-family:'Bodoni Moda',serif;font-size:1.7rem;font-weight:700;color:var(--c4)}
+.prod-btn{padding:.55rem 1.3rem;background:var(--c4);color:#0c0c0c;border:none;border-radius:2px;font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:all .3s}
+.prod-btn:hover{background:var(--c3);transform:scale(1.05)}
+
+/* Shared buttons */
+.btn-p{padding:.75rem 2rem;background:var(--c4);color:#0a0a0a;border:none;border-radius:3px;font-family:'Jost',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:all .3s}
+.btn-p:hover{background:var(--c3);transform:translateY(-2px);box-shadow:0 8px 24px rgba(29,162,126,.35)}
+.btn-o{padding:.75rem 2rem;background:transparent;color:var(--c4);border:1px solid var(--c4);border-radius:3px;font-family:'Jost',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:all .3s}
+.btn-o:hover{background:rgba(29,162,126,.1);transform:translateY(-2px)}
+
+/* ═══════════════════════════════════════
+   PRODUCT POPUP MODAL
+═══════════════════════════════════════ */
+#prodModal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  background: rgba(2, 10, 6, 0.88);
+  backdrop-filter: blur(10px);
+  overflow-y: auto;
+  padding: 2rem 1rem;
+  animation: modalBgIn .35s ease;
+}
+@keyframes modalBgIn { from { opacity: 0; } to { opacity: 1; } }
+
+#prodModal.open { display: flex; align-items: flex-start; justify-content: center; }
+
+.pm-box {
+  background: linear-gradient(145deg, #0b2e24 0%, #082820 50%, #051c18 100%);
+  border: 1px solid rgba(29,162,126,.35);
+  border-radius: 24px;
+  width: 100%;
+  max-width: 860px;
+  position: relative;
+  overflow: hidden;
+  animation: modalIn .4s cubic-bezier(.16,1,.3,1);
+  box-shadow: 0 40px 100px rgba(0,0,0,.7), inset 0 1px 1px rgba(255,255,255,.08);
+}
+@keyframes modalIn {
+  from { transform: translateY(60px) scale(.96); opacity: 0; }
+  to   { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+/* Glowing top edge */
+.pm-box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(to right, #1c8585, #1da27e, #25c49a);
+}
+
+/* Close button */
+.pm-close {
+  position: absolute;
+  top: 1.3rem; right: 1.5rem;
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.2);
+  color: #f0faf7;
+  font-size: 1.4rem;
+  font-weight: 300;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .3s ease;
+  z-index: 10;
+  font-family: 'Jost', sans-serif;
+}
+.pm-close:hover { 
+  background: linear-gradient(135deg, rgba(29,162,126,.4), rgba(28,133,133,.3));
+  transform: scale(1.1) rotate(90deg);
+  box-shadow: 0 4px 12px rgba(29,162,126,.3);
+}
+
+/* Header section */
+.pm-head {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 2rem;
+  padding: 2.5rem 2.5rem 2rem;
+  border-bottom: 1px solid rgba(29,162,126,.2);
+  align-items: center;
+}
+.pm-icon-box {
+  width: 160px; height: 160px;
+  border-radius: 20px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(29,162,126,.3);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.pm-product-img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.pm-badge {
+  display: inline-block;
+  padding: .25rem .8rem;
+  background: rgba(29,162,126,.2);
+  border: 1px solid rgba(29,162,126,.4);
+  border-radius: 30px;
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #1da27e;
+  margin-bottom: .7rem;
+}
+.pm-title {
+  font-family: 'Bodoni Moda', serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #f0faf7;
+  line-height: 1.1;
+  margin-bottom: .5rem;
+}
+.pm-short {
+  font-size: .92rem;
+  color: #6aada0;
+  line-height: 1.7;
+}
+
+/* Body sections */
+.pm-body {
+  padding: 2rem 2.5rem 2.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.pm-block {
+  padding: 1.5rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.07);
+}
+.pm-block.problem {
+  background: rgba(200, 60, 60, .07);
+  border-color: rgba(200,80,80,.2);
+}
+.pm-block.solution {
+  background: rgba(29,162,126,.07);
+  border-color: rgba(29,162,126,.25);
+}
+.pm-block-label {
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  margin-bottom: .7rem;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+.pm-block.problem .pm-block-label { color: #e88080; }
+.pm-block.solution .pm-block-label { color: #1da27e; }
+.pm-block p {
+  font-size: .9rem;
+  color: rgba(240,250,247,.7);
+  line-height: 1.75;
+}
+
+/* 3 key points */
+.pm-points {
+  grid-column: 1 / -1;
+  padding: 1.5rem;
+  background: rgba(255,255,255,.03);
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.07);
+}
+.pm-points-label {
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: #1da27e;
+  margin-bottom: 1.2rem;
+  display: flex; align-items: center; gap: .5rem;
+}
+.pm-points-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+.pm-point {
+  padding: 1.2rem;
+  background: rgba(29,162,126,.07);
+  border: 1px solid rgba(29,162,126,.18);
+  border-radius: 12px;
+  text-align: center;
+  transition: all .3s;
+}
+.pm-point:hover {
+  background: rgba(29,162,126,.14);
+  transform: translateY(-4px);
+  border-color: rgba(29,162,126,.35);
+}
+.pm-point-icon { font-size: 2rem; margin-bottom: .6rem; }
+.pm-point-title {
+  font-family: 'Bodoni Moda', serif;
+  font-size: .95rem;
+  font-weight: 700;
+  color: #f0faf7;
+  margin-bottom: .35rem;
+}
+.pm-point-desc {
+  font-size: .78rem;
+  color: #5a8c82;
+  line-height: 1.55;
+}
+
+/* CTA row in popup */
+.pm-cta {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: .5rem;
+}
+.pm-btn-buy {
+  padding: .75rem 2.2rem;
+  background: linear-gradient(135deg, #1da27e, #1c8585);
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  font-size: .88rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(29,162,126,.35);
+  transition: all .3s;
+}
+.pm-btn-buy:hover { transform: translateY(-3px); box-shadow: 0 14px 32px rgba(29,162,126,.5); }
+.pm-btn-close2 {
+  padding: .75rem 2rem;
+  background: transparent;
+  color: rgba(240,250,247,.6);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 30px;
+  font-size: .88rem;
+  cursor: pointer;
+  transition: all .3s;
+}
+.pm-btn-close2:hover { border-color: rgba(255,255,255,.3); color: #f0faf7; }
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.about-left p{color:var(--muted);line-height:1.9;font-size:.95rem;margin-bottom:1.2rem}
+.tag-strip{display:flex;flex-wrap:wrap;gap:.6rem;margin:1.5rem 0}
+.tag{padding:.35rem .9rem;border:1px solid var(--border);border-radius:2px;font-size:.78rem;color:var(--white2);transition:all .3s;cursor:default}
+.tag:hover{border-color:var(--c4);color:var(--c4)}
+.founders-col{display:flex;flex-direction:column;gap:1.5rem}
+.f-card{padding:2rem;background:rgba(16,56,58,.6);border:1px solid var(--border);border-radius:2px;display:flex;gap:1.5rem;align-items:flex-start;position:relative;overflow:hidden;transition:all .4s;backdrop-filter:blur(8px)}
+.f-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,var(--c3),var(--c4));transform:scaleY(0);transform-origin:top;transition:transform .4s}
+.f-card:hover{border-color:rgba(29,162,126,.3);transform:translateX(6px)}
+.f-card:hover::before{transform:scaleY(1)}
+.f-av{width:72px;height:72px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--c2),var(--c3));border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:2rem}
+.f-name{font-family:'Bodoni Moda',serif;font-size:1.3rem;color:var(--white);margin-bottom:.2rem}
+.f-role{font-size:.75rem;color:var(--c4);font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.7rem}
+.f-bio{font-size:.85rem;color:var(--muted);line-height:1.7}
+.f-stats{display:flex;gap:1.5rem;margin-top:1rem}
+.f-snum{font-family:'Bodoni Moda',serif;font-size:1.3rem;font-weight:700;color:var(--c4)}
+.f-slabel{font-size:.68rem;color:var(--muted);letter-spacing:.05em}
+
+/* MARQUEE */
+.mq-wrap{overflow:hidden;background:rgba(28,133,133,.65);border-top:1px solid rgba(255,255,255,.1);border-bottom:1px solid rgba(255,255,255,.1);padding:.9rem 0;backdrop-filter:blur(8px)}
+.mq-track{display:flex;gap:2.5rem;animation:mq 22s linear infinite;white-space:nowrap}
+.mq-item{display:flex;align-items:center;gap:.7rem;font-size:.82rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.8)}
+.mq-dot{color:#fff;font-size:.9rem}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+/*video*/
+.video-title{
+    font-size:clamp(2.4rem,5vw,4rem);font-weight:700;line-height:1.1;color:var(--c4);margin-bottom:1rem;
+    padding-bottom: 10px;
+}
+.video-bgg{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+.bg-video{
+    width: 850px;
+    height: inherit;
+    max-width: 90%;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+} 
+
+
+/*acknowledgement*/
+.ack-section{
+padding:60px 10%;
+}
+
+.ack-section h1{
+text-align:center;
+font-size:40px;
+margin-bottom:40px;
+color:#fbfcfb;
+font-style:italic;color:var(--c4);
+
+font-size:clamp(2.4rem,5vw,4rem);font-weight:700;line-height:1.1
+}
+
+.ack-container{
+display:flex;
+gap:40px;
+align-items:center;
+justify-content:space-between;
+flex-wrap:wrap;
+}
+
+.ack-text{
+flex:1;
+min-width:300px;
+font-size:18px;
+line-height:1.8;
+color:#fffdfd;
+}
+
+.ack-text b{
+color:#1b7a54;
+}
+
+.ack-images{
+flex:1;
+display:flex;
+flex-direction:column;
+gap:20px;
+align-items:center;
+}
+
+.ack-images img{
+width:90%;
+max-width:300px;
+border-radius:12px;
+box-shadow:0 5px 20px rgba(0,0,0,0.15);
+transition:0.3s;
+}
+
+.ack-images img:hover{
+transform:scale(1.05);
+}
+/* FOOTER */
+footer{background:rgba(10,35,28,.88);border-top:1px solid var(--border);padding:4rem 3.5rem 2rem;backdrop-filter:blur(10px)}
+.ft-inner{max-width:1280px;margin:0 auto}
+.ft-header{display:flex;align-items:center;gap:1.5rem;margin-bottom:1rem}
+.ft-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:4rem;margin-bottom:3rem;align-items:start}
+.ft-brand{font-size:1.5rem;font-weight:700;letter-spacing:.15em;color:var(--white2);margin-bottom:1.2rem;text-transform:uppercase;}
+.ft-tagline{font-size:1rem;font-style:italic;color:var(--c4);margin-bottom:.8rem}
+.ft-desc{font-size:1rem;color:var(--muted);line-height:1.7;max-width:280px}
+.ft-col h4{font-size:1.5rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--white2);margin-bottom:1.2rem}
+.ft-links{display:flex;flex-direction:column;gap:.5rem}
+.ft-links a{font-size:1rem;color:var(--muted);text-decoration:none;transition:color .3s;cursor:pointer}
+.ft-links a:hover{color:var(--white)}
+.ft-ci{display:flex;align-items:center;gap:.7rem;font-size:.87rem;color:var(--white);margin-bottom:.6rem}
+.ft-bottom{border-top:1px solid var(--border);padding-top:1.8rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.ft-copy{font-size:.8rem;color:var(--muted)}
+.ft-social{display:flex;gap:.7rem}
+.soc{width:34px;height:34px;border:1px solid var(--border);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:.75rem;color:var(--muted);text-decoration:none;transition:all .3s}
+.soc:hover{border-color:var(--c4);color:var(--c4);transform:translateY(-2px)}
+.ft-logo-mark img{display:block;height:80px;width:auto}
+
+/* mithiren */
+.mithran-section{
+    padding: 60px 20px;
+    background:#f5fbf5;
+}
+
+.mithran-container{
+    max-width:1100px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:50px;
+}
+
+.mithran-image img{
+    width:350px;
+}
+
+.mithran-content{
+    max-width:550px;
+}
+
+.mithran-content h2{
+    font-size:36px;
+    color:#2e7d32;
+    margin-bottom:5px;
+}
+
+.mithran-content h3{
+    font-size:20px;
+    color:#4caf50;
+    margin-bottom:15px;
+}
+
+.mithran-content p{
+    font-size:16px;
+    line-height:1.6;
+    margin-bottom:15px;
+}
+
+.mithran-content ul{
+    list-style:none;
+    padding:0;
+}
+
+.mithran-content li{
+    font-size:16px;
+    margin-bottom:8px;
+}
+
+/* PAGE SWITCH */
+.page{display:none}.page.on{display:block}
+ /* ═══════════════════════════════════════
+     SPLASH SCREEN
+═══════════════════════════════════════  */
+/* Main container */
+.image-container{
+    position: absolute;
+    width: 100%;
+}
+
+/* General image style */
+.img{
+    position: absolute;
+    object-fit: contain;
+}
+
+/* Size Options */
+.img-small{
+    width:120px;
+    height:auto;
+}
+
+.img-medium{
+    width:200px;
+    height:auto;
+}
+
+.img-large{
+    width:350px;
+    height:auto;
+}
+
+/* Position Options */
+
+/* Left */
+.img-left{
+    left:5%;
+    top:50%;
+    transform:translateY(-50%);
+}
+
+/* Right */
+.img-right{
+    right: 3%;
+    top:60%;
+    /* transform:translateX(100%); */
+    transform:translateY(-75%);
+}
+
+/* Center */
+.img-center{
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+}
+
+/* Top */
+.img-top{
+    top:5%;
+    left:50%;
+    transform:translateX(-50%);
+}
+
+/* Bottom */
+.img-bottom{
+    bottom:5%;
+    left:50%;
+    transform:translateX(-50%);
+}
+/* ========================================= */
+
+@media(max-width:1024px){
+  .mv-grid{grid-template-columns:1fr}
+  .prod-grid{grid-template-columns:1fr 1fr}
+  .about-grid{grid-template-columns:1fr}
+  .values-row{grid-template-columns:1fr 1fr}
+  .ft-grid{grid-template-columns:1fr 1fr}
+  .pm-body{grid-template-columns:1fr}
+  .pm-points-grid{grid-template-columns:1fr}
+  .pm-head{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  .hdr{padding:1rem 1.5rem}
+  nav{display:none}
+  .ham{display:flex}
+  .sec{padding:5rem 1.5rem}
+  .prod-grid{grid-template-columns:1fr}
+  .values-row{grid-template-columns:1fr 1fr}
+  .ft-grid{grid-template-columns:1fr;gap:2rem}
+  .ft-bottom{flex-direction:column}
+  .prod-hdr{flex-direction:column;align-items:flex-start;gap:1rem}
+  .pm-body{padding:1.5rem}
+  .pm-head{padding:1.5rem;gap:1rem}
+  .pm-points-grid{grid-template-columns:1fr}
+  .splash-logo-img{width:140px;height:140px}
+  .splash-name{font-size:2rem}
+}
+.icon-all{
+    width:20px;       /* icon width */
+    height:20px;      /* icon height */
+    object-fit:contain;
+    margin-right:8px;
+    vertical-align:middle;
+}
+
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     SPLASH SCREEN
+═══════════════════════════════════════ -->
+<div id="splash">
+  <!-- Bokeh floating dots -->
+  <div style="position:absolute;inset:0;pointer-events:none;overflow:hidden">
+    <div style="position:absolute;width:6px;height:6px;border-radius:50%;background:#25c49a;opacity:.5;top:15%;left:20%;animation:glow 1.5s ease-in-out infinite alternate"></div>
+    <div style="position:absolute;width:4px;height:4px;border-radius:50%;background:#1da27e;opacity:.4;top:70%;left:75%;animation:glow 2s .4s ease-in-out infinite alternate"></div>
+    <div style="position:absolute;width:5px;height:5px;border-radius:50%;background:#1c8585;opacity:.45;top:40%;left:85%;animation:glow 1.8s .2s ease-in-out infinite alternate"></div>
+    <div style="position:absolute;width:3px;height:3px;border-radius:50%;background:#b0ffe0;opacity:.5;top:80%;left:25%;animation:glow 2.2s .6s ease-in-out infinite alternate"></div>
+    <div style="position:absolute;width:4px;height:4px;border-radius:50%;background:#25c49a;opacity:.4;top:25%;left:60%;animation:glow 1.6s .3s ease-in-out infinite alternate"></div>
+    <div style="position:absolute;width:3px;height:3px;border-radius:50%;background:#1da27e;opacity:.35;top:55%;left:10%;animation:glow 2s .8s ease-in-out infinite alternate"></div>
+  </div>
+
+  <div class="splash-logo-wrap" id="splashLogoWrap">
+<img class="splash-logo-img" id="splashLogoImg" src="images/logoname.png" alt="ThulirDhara Logo">
+  </div>
+  <div class="splash-name" id="splashName">ThulirDhara</div>
+  <div class="splash-tagline" id="splashTagline">Growing Nature · Empowering Agriculture</div>
+  <button class="splash-enter-btn" id="splashBtn" onclick="enterSite()">Enter →</button>
+</div>
+
+<!-- ═══════════════════════
+     PRODUCT MODAL
+═══════════════════════ -->
+<div id="prodModal">
+  <div class="pm-box" id="pmBox">
+    <button class="pm-close" onclick="closeModal()">✕</button>
+    <!-- Dynamically populated -->
+  </div>
+</div>
+
+<!-- ═══════════════════════ HEADER ═══════════════════════ -->
+<header class="hdr" id="hdr">
+  <div class="logo" onclick="showPage('home')">
+<div class="logo-mark"><img src="images/logo.png" alt="ThulirDhara Logo"/></div>
+  </div>
+  <nav id="deskNav">
+    <button class="nl on" id="n-home"     onclick="showPage('home')">Home</button>
+    <button class="nl"    id="n-products" onclick="showPage('products')">Products</button>
+    <button class="nl"    id="n-about"    onclick="showPage('about')">About</button>
+    <button class="hdr-btn" onclick="showPage('home');setTimeout(()=>document.getElementById('cta-sec').scrollIntoView({behavior:'smooth'}),200)">Get in Touch</button>
+  </nav>
+  <button class="ham" onclick="toggleMob()"><span></span><span></span><span></span></button>
+</header>
+
+<!-- Mobile nav -->
+<div id="mobNav" style="display:none;position:fixed;inset:0;background:rgba(7,64,71,.97);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:2rem;">
+  <button class="nl" style="font-size:1.8rem;" onclick="showPage('home');toggleMob()">Home</button>
+  <button class="nl" style="font-size:1.8rem;" onclick="showPage('products');toggleMob()">Products</button>
+  <button class="nl" style="font-size:1.8rem;" onclick="showPage('about');toggleMob()">About</button>
+  <button class="hdr-btn" onclick="showPage('home');toggleMob();setTimeout(()=>document.getElementById('cta-sec').scrollIntoView({behavior:'smooth'}),300)">Get in Touch</button>
+</div>
+
+<!-- ═══════════════════════ HOME PAGE ═══════════════════════ -->
+<div class="page on" id="page-home">
+
+  <!-- HERO — UNCHANGED -->
+  <section class="hero">
+    <div class="overlay"></div>
+    <img src="images/bg.png" class="tree-bg">
+    <div class="leaves">
+      <span style="top:10%;left:20%;"></span>
+      <span style="top:60%;left:10%;"></span>
+      <span style="top:30%;left:80%;"></span>
+      <span style="top:70%;left:70%;"></span>
+      <span style="top:50%;left:50%;"></span>
+    </div>
+    <div class="stars">
+      <span style="top:5%;left:5%;"></span><span style="top:15%;left:30%;"></span>
+      <span style="top:50%;left:80%;"></span><span style="top:75%;left:40%;"></span>
+      <span style="top:85%;left:70%;"></span><span style="top:2%;left:45%;"></span>
+      <span style="top:8%;left:88%;"></span><span style="top:12%;left:12%;"></span>
+      <span style="top:18%;left:65%;"></span><span style="top:22%;left:5%;"></span>
+      <span style="top:25%;left:95%;"></span><span style="top:28%;left:42%;"></span>
+      <span style="top:32%;left:18%;"></span><span style="top:35%;left:77%;"></span>
+      <span style="top:38%;left:55%;"></span><span style="top:42%;left:2%;"></span>
+      <span style="top:45%;left:33%;"></span><span style="top:48%;left:90%;"></span>
+      <span style="top:52%;left:15%;"></span><span style="top:55%;left:60%;"></span>
+      <span style="top:58%;left:38%;"></span><span style="top:62%;left:82%;"></span>
+      <span style="top:65%;left:7%;"></span><span style="top:68%;left:50%;"></span>
+      <span style="top:72%;left:98%;"></span><span style="top:78%;left:22%;"></span>
+      <span style="top:80%;left:85%;"></span><span style="top:82%;left:10%;"></span>
+      <span style="top:88%;left:48%;"></span><span style="top:92%;left:28%;"></span>
+      <span style="top:95%;left:92%;"></span><span style="top:98%;left:63%;"></span>
+      <span style="top:4%;left:72%;"></span><span style="top:14%;left:52%;"></span>
+      <span style="top:27%;left:25%;"></span><span style="top:40%;left:88%;"></span>
+      <span style="top:53%;left:44%;"></span><span style="top:66%;left:68%;"></span>
+      <span style="top:79%;left:12%;"></span><span style="top:91%;left:55%;"></span>
+    </div>
+    <div class="hero-container">
+      <div class="hero-text">
+        <p>
+          "நீரின்றி அமையாது உலகெனின் யார்யார்க்கும்<br>
+          வானின்று அமையாது ஒழுக்கு"<br>
+          — திருவள்ளுவர்
+        </p>
+      </div>
+      <div class="hero-image">
+<img src="images/logoname.png" alt="ThulirDhara Logo">
+      </div>
+    </div>
+    <div class="hero-content">
+      <h1 class="hero-title">
+        <span class="gradient-text">Growing Nature,</span><br>
+        <span class="text-dark">Empowering Agriculture</span>
+      </h1>
+      <p class="hero-para">
+        Sustainable agricultural products for modern farming.
+        Nurturing the earth, empowering farmers.
+        
+      </p>
+      <div class="hero-buttons">
+        <button class="btn-primary" onclick="showPage('products')"> Explore Products</button>
+<button class="btn-secondary" onclick="document.getElementById('cta-sec').scrollIntoView({behavior:'smooth'})"><img src="images/telephone.png" alt="Phone" class="icon-all"> Contact Us</button>
+
+      </div>
+    </div>
+  </section>
+  <!-- /HERO -->
+
+  <!-- ── ALL POST-HERO CONTENT WITH BG IMAGE ── -->
+  <div class="bg-section-wrap">
+
+    <div class="about-banner" style="padding:9rem 3.5rem 5rem;border-bottom:1px solid var(--border)">
+      <div class="inner">
+        <div class="sec-label rv">Who We Are</div>
+        <h1 class="sec-title rv d1">About <em>ThulirDhara</em></h1>
+        <p class="sec-sub rv d2">Cultivating innovation, nurturing sustainability<br>“ThulirDhara provides sustainable agricultural solutions designed to support
+           modern farming while protecting the environment.”</p>
+      </div>
+      <div class="image-container">
+      <img src="images/bb1.png" class="img img-right img-medium">
+      </div>
+    </div>
+    <div class="video-bgg">
+
+    <h2 class="video-title">Journey Video</h2>
+    <video class="bg-video" controls>
+        <source src="images/video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    </div>
+
+    <!-- MISSION & VISION -->
+    <section class="sec" id="mv">
+      <div class="inner">
+        <div class="rv">
+          <div class="sec-label">What Drives Us</div>
+          <h2 class="sec-title">Mission &amp; <em>Vision</em></h2>
+          <p class="sec-sub">Rooted in nature's wisdom, growing toward a sustainable tomorrow for every Indian farmer.</p>
+        </div>
+        <div class="mv-grid">
+          <div class="mv-card rv d1">
+            <div class="mv-icon">
+              <img class="mis" src="images/mission.jpg"/>
+              <h3>Mission</h3>
+            </div>
+            <p>To provide sustainable, eco-friendly agricultural products that enhance farmer productivity while preserving our environment for future generations.</p>
+            <ul>
+              <li>Eco-friendly solutions that reduce chemical dependency</li>
+              <li>Accessible pricing for every Indian farmer</li>
+              <li>Technology-backed precision agriculture tools</li>
+              <li>Continuous innovation rooted in traditional wisdom</li>
+            </ul>
+          </div>
+          <div class="mv-card rv d2">
+            <div class="mv-icon">
+              <img class="vis" src="images/vision.jpg"/>
+              <h3>Vision</h3>
+            </div>
+            <p>To become India's most trusted provider of innovative agricultural solutions, transforming how every farmer interacts with the land they call home.</p>
+            <ul>
+              <li>10 million farmers empowered by 2030</li>
+              <li>Pan-India presence across all 28 states</li>
+              <li>Carbon-neutral agricultural supply chain</li>
+              <li>Bridging tech innovation with traditional farming</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="rv d2" style="margin-top:5rem">
+          <div class="sec-label">Core Values</div>
+          <h2 class="sec-title" style="margin-bottom:0">What We <em>Stand For</em></h2>
+        </div>
+        <div class="values-row">
+          <div class="val-item1 rv d1"><div class="val-icon"><img src="images/4.png" alt="Sustainability"></div><div class="val-title">Sustainability</div><div class="val-desc">Every product is designed with the earth's long-term health in mind</div></div>
+          <div class="val-item2 rv d2"><div class="val-icon"><img src="images/3.png" alt="Innovation"></div><div class="val-title">Innovation</div><div class="val-desc">Blending cutting-edge agri-tech with centuries of farming wisdom</div></div>
+          <div class="val-item3 rv d3"><div class="val-icon"><img src="images/2.png" alt="Farmer-First"></div><div class="val-title">Farmer-First</div><div class="val-desc">Every decision begins and ends with the welfare of our farmers</div></div>
+          <div class="val-item4 rv d4"><div class="val-icon"><img src="images/11.png" alt="Stewardship"></div><div class="val-title">Stewardship</div><div class="val-desc">Protecting soil, water and biodiversity for future generations</div></div>
+        </div>
+       
+      </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="mq-wrap">
+      <div class="mq-track">
+        <span class="mq-item"><span class="mq-dot">✦</span>Bio Mulch Film</span>
+        <span class="mq-item"><span class="mq-dot">✦</span>Drip Irrigation</span>
+        <span class="mq-item"><span class="mq-dot">✦</span>Premium Seeds</span>
+        <span class="mq-item"><span class="mq-dot">✦</span>Greenhouse Film</span>
+        <span class="mq-item"><span class="mq-dot">✦</span>Sustainable Farming</span>
+        <span class="mq-item"><span class="mq-dot">✦</span>Eco-Friendly Solutions</span>
+        <span class="mq-item"><span class="mq-dot">✦</span>Farmer Empowerment</span>
+        <span class="mq-item"><span class="mq-dot">✦</span>Tamil Nadu Agriculture</span>
+        <span class="mq-item"><span class="mq-dot">✦</span>Bio Mulch Film</span>
+        <span class="mq-item"><span class="mq-dot">✦</span>Drip Irrigation</span>
+        <span class="mq-item"><span class="mq-dot">✦</span>Premium Seeds</span>
+        <span class="mq-item"><span class="mq-dot">✦</span>Greenhouse Film</span>
+        <span class="mq-item"><span class="mq-dot">✦</span>Sustainable Farming</span>
+        <span class="mq-item"><span class="mq-dot">✦</span>Eco-Friendly Solutions</span>
+        <span class="mq-item"><span class="mq-dot">✦</span>Farmer Empowerment</span>
+        <span class="mq-item"><span class="mq-dot">✦</span>Tamil Nadu Agriculture</span>
+      </div>
+    </div>
+
+    <!-- PRODUCTS PREVIEW -->
+    <section class="sec">
+      <div class="inner">
+         <div class="image-container" style="transform: translateY(80%);right: -1%;">
+       <img src="images/s3.png" class="img img-left img-medium" style="transform: translateY(-50%);left: -3%;">
+      </div>
+        <div class="prod-hdr">
+          <div>
+            <div class="sec-label rv">Premium Products</div>
+            <h2 class="sec-title rv d1">Handpicked <em>Solutions</em></h2>
+          </div>
+          <button class="btn-o rv d2" onclick="showPage('products')">View All →</button>
+        </div>
+        <div class="prod-grid">
+          <div class="prod-card rv d1" onclick="openModal(0)">
+<div class="prod-img"><img class="prod-ing" src="images/film.jpg" alt="Bio Mulch Film"><div class="prod-badge">Mulching</div></div>
+            <div class="prod-body">
+
+              <div class="prod-name">Bio Mulch Film</div>
+              <div class="prod-desc">Biodegradable, eco-friendly mulch for sustainable farming.</div>
+              <div class="prod-foot"><button class="prod-btn" onclick="event.stopPropagation();openModal(0)">View Details</button></div>
+            </div>
+          </div>
+          <div class="prod-card rv d2" onclick="openModal(1)">
+<div class="prod-img"><img class="prod-ing" src="images/seed.webp" alt="Premium Seeds"><div class="prod-badge">Seeds</div></div>
+            <div class="prod-body">
+
+              <div class="prod-name">Premium Seeds Pack</div>
+              <div class="prod-desc">High-yield certified organic seeds.</div>
+              <div class="prod-foot"><button class="prod-btn" onclick="event.stopPropagation();openModal(1)">View Details</button></div>
+            </div>
+          </div>
+          <div class="prod-card rv d3" onclick="openModal(2)">
+<div class="prod-img"><img class="prod-ing" src="images/green.webp" alt="Greenhouse Film"><div class="prod-badge">Protection</div></div>
+            <div class="prod-body">
+
+              <div class="prod-name">GreenHouse Film </div>
+              <div class="prod-desc">UV-protected greenhouse covering</div>
+              <div class="prod-foot"><button class="prod-btn" onclick="event.stopPropagation();openModal(2)">View Details</button></div>
+            </div>
+          </div>
+        </div> 
+        <div style="text-align:center;margin-top:3rem " class="rv">
+          <button class="btn-p" onclick="showPage('products')">Explore All Products →</button>
+        </div>
+        <div style="text-align:center;margin-top:3rem;width:30%;align-items:center; left: 110%; transform: translateX(120%);" class="btn-primary">Product coming soon...</div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="cta-sec" style="padding:7rem 3.5rem;text-align:center;border-top:1px solid var(--border)">
+      <div style="max-width:600px;margin:0 auto" class="rv">
+        <div class="sec-label" style="justify-content:center">Contact</div>
+        <h2 class="sec-title" style="text-align:center">Ready to <em>Transform</em><br>Your Farm?</h2>
+        <p style="color:var(--muted);margin:1rem auto 2.5rem;max-width:480px;line-height:1.8">Join thousands of farmers who've embraced sustainable, tech-driven agriculture with ThulirDhara.</p>
+        <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+          <button class="btn-p"><img src="images/email.png" alt="Email" class="icon-all">thulirdhara.innovation@gmail.com</button>
+          <button class="btn-o"><img src="images/telephone.png" alt="Phone" class="icon-all"> +91 9488066420</button>
+        </div>
+        
+
+      </div>
+      <div>
+
+      </div>
+    </section>
+    <!--mithran-->
+    <section class="mithran-section"style="border-top:1px solid var(--border)">
+
+  <div class="mithran-container" >
+
+    <!-- Left : Mithran Character -->
+    <div class="mithran-image">
+      <img src="images/bb1.png" alt="Mithran - Pasumai Mithran">
+    </div>
+
+
+    <!-- Right : Content -->
+    <div class="mithran-content">
+
+      <h1>Mithran</h1>
+      <h3>Pasumai Mithran – Friend of Green Nature</h3>
+
+      <p>
+        Mithran is the green guardian and farmer’s friend from 
+        <strong>Thulir Dhara</strong>, helping protect soil, water, and crops 
+        through sustainable agricultural innovation.
+      </p>
+
+      <h2>Origin Story</h2>
+      <p>
+        Long ago, the land began to suffer from chemicals, plastic waste, and soil damage. 
+        Farmers struggled as the earth lost its strength. From the first green sprout (Thulir) 
+        that grew after a rain, a small guardian was born — Mithran.
+      </p>
+
+      <p>
+        Mithran travels across farms helping the soil heal and teaching farmers new 
+        sustainable ways to grow food. Wherever Mithran appears, soil becomes richer, 
+        crops grow healthier, and waste turns into useful materials.
+      </p>
+
+      <h2>Visual Identity of Mithran</h2>
+      <ul>
+        <li> Green body → represents nature</li>
+        <li> Farmer hat → represents agriculture</li>
+        <li> Wind turbine symbol → represents sustainability</li>
+        <li> Friendly expression → builds trust with farmers</li>
+      </ul>
+
+    </div>
+
+  </div>
+
+</section>
+
+  </div><!-- /bg-section-wrap -->
+</div><!-- /page-home -->
+
+<!-- ═══════════════════════ PRODUCTS PAGE ═══════════════════════ -->
+<div class="page" id="page-products">
+  <div class="bg-section-wrap">
+    <div class="prod-banner" style="padding:9rem 3.5rem 5rem;position:relative;overflow:hidden">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 100%,rgba(29,162,126,.06) 0%,transparent 60%);pointer-events:none"></div>
+      <div class="inner">
+        <div class="sec-label rv">All Products</div>
+        <h1 class="sec-title rv d1">Our <em>Premium</em> Agricultural Solutions</h1>
+        <p class="sec-sub rv d2">Sustainable products for modern farming</p>
+        <div class="rv d3" style="margin-top:1.5rem">
+          <input id="psearch" type="text" placeholder="Search products..." oninput="filterP()"
+            style="padding:.75rem 1.5rem;background:rgba(16,56,58,.6);border:1px solid var(--border);border-radius:2px;color:var(--white);font-family:'Jost',sans-serif;font-size:.9rem;outline:none;width:340px"
+            onfocus="this.style.borderColor='var(--c4)'" onblur="this.style.borderColor='var(--border)'">
+        </div>
+      </div>
+    </div>
+    <section class="sec" style="padding-top:4rem">
+      <div class="inner"><div class="prod-grid" id="pGrid"></div></div>
+       <div style="font-weight:100;text-align:center;margin-top:3rem;width:30%;align-items:center; left: 110%; transform: translateX(120%);" class="btn-primary">Product coming soon...</div>
+    </section>
+  </div>
+</div>
+
+<!-- ═══════════════════════ ABOUT PAGE ═══════════════════════ -->
+<div class="page" id="page-about">
+  <div class="bg-section-wrap">
+    <div class="about-banner" style="padding:9rem 3.5rem 5rem;border-bottom:1px solid var(--border)">
+      <div class="inner">
+        <div class="sec-label rv">Who We Are</div>
+        <h1 class="sec-title rv d1">About <em>ThulirDhara</em></h1>
+        <p class="sec-sub rv d2">Cultivating innovation, nurturing sustainability<br>“ThulirDhara provides sustainable agricultural solutions designed to support
+           modern farming while protecting the environment.”</p>
+      </div>
+      <div class="image-container">
+      <img src="images/bb1.png" class="img img-right img-medium">
+      </div>
+    </div>
+    <section class="sec">
+      <div class="inner">
+        <div class="about-grid">
+          <div class="rv-l">
+            <div class="sec-label">Our Story</div>
+            <h2 class="sec-title">Technology Meets <em>Tradition</em></h2>
+            <p>Welcome to ThulirDhara — where technology meets tradition. We believe nature is not just a resource, but a living partner. Our mission is to protect soil, conserve water, and empower farmers through sustainable innovation.</p>
+            <p>Founded with deep respect for Tamil Nadu's rich agricultural heritage, ThulirDhara bridges the gap between modern agri-tech and traditional farming wisdom.</p>
+            <div class="tag-strip">
+              <span class="tag"> Sustainability</span><span class="tag"> Innovation</span>
+              <span class="tag"> Farmer-First</span><span class="tag">Eco-Friendly</span>
+              <span class="tag"> Research-Backed</span>
+            </div>
+            <button class="btn-p" onclick="showPage('products')">Explore Products →</button>
+          </div>
+          <div class="founders-col rv-r">
+            <div class="f-card">
+              <div class="f-av">👨‍🌾</div>
+              <div>
+                <div class="f-name">Srinivasan T</div>
+                <div class="f-role">Founder</div>
+                <div class="f-bio">Visionary leader who transformed Indian agriculture through eco-friendly innovation, empowering thousands of farmers nationwide.</div>
+              </div>
+            </div>
+            <!-- <div class="f-card">
+              <div class="f-av">👩‍🌾</div>
+              <div>
+                <div class="f-name">Malathi</div>
+                <div class="f-role">Founder</div>
+                <div class="f-bio">Leads product innovation and sustainability strategy — ensuring every product harmonizes growth with nature, from concept to crop.</div>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="ack-section" style="border-top:1px solid var(--border)">
+<h1>Acknowledgement</h1>
+      <div class="ack-container" >
+
+<div class="ack-text">
+
+<p>
+We sincerely express our heartfelt gratitude to 
+<b>ACIC – Mepco Innovative Foundation (ACIC-MIF)</b> 
+for their continuous encouragement, mentorship, and valuable support.
+</p>
+
+<p>
+We are proud to be supported under the 
+<b>Atal Innovation Mission (AIM)</b>, Government of India, 
+and grateful for the opportunity to develop our ideas through 
+the incubation and seed funding provided by <b>ACIC-MIF</b>.
+</p>
+
+<p>
+Our startup initiative has been recognized by 
+<b>Atal Innovation Mission, New Delhi</b>, which motivates us 
+to work harder toward sustainable innovation and impactful solutions.
+</p>
+
+<p>
+We would also like to extend our sincere thanks to 
+<b>S. Malthi Devi – Mepco Management</b> for her valuable guidance 
+and encouragement throughout this journey.
+</p>
+
+<p>
+Special appreciation goes to <b>N. Ayyanar</b> for designing 
+and developing the website and theme, helping us present our vision 
+in a professional and creative way.
+</p>
+
+<p>
+Finally, we express our deepest gratitude to our 
+<b>friends and family</b> whose continuous support, motivation, 
+and belief in our vision made this journey possible.
+</p>
+
+</div>
+
+<div class="ack-images">
+
+<img src="images/ack1.jpeg" alt="Innovation Support">
+<img src="images/ack2.jpeg" alt="Startup Recognition">
+
+</div>
+
+</div>
+
+</section>
+
+    <section class="sec" style="border-top:1px solid var(--border)">
+      <div class="inner">
+        <div class="rv" style="text-align:center;margin-bottom:4rem">
+          <div class="sec-label" style="justify-content:center">Values</div>
+          <h2 class="sec-title" style="text-align:center">Mission, Vision <em>&amp; Values</em></h2>
+        </div>
+        <div class="mv-grid">
+          <div class="mv-card rv d1">
+            <div class="mv-icon"><img class="mis" src="images/mission.jpg"/><h3>Mission</h3></div>
+            <p>To provide sustainable, eco-friendly agricultural products that enhance farmer productivity while preserving our environment for future generations.</p>
+            <ul>
+              <li>Eco-friendly solutions that reduce chemical dependency</li>
+              <li>Accessible pricing for every Indian farmer</li>
+              <li>Technology-backed precision agriculture tools</li>
+              <li>Continuous innovation rooted in traditional wisdom</li>
+            </ul>
+          </div>
+          <div class="mv-card rv d2">
+            <div class="mv-icon"><img class="vis" src="images/vision.jpg"/><h3>Vision</h3></div>
+            <p>To become India's most trusted provider of innovative agricultural solutions, transforming how every farmer interacts with the land they call home.</p>
+            <ul>
+              <li>10 million farmers empowered by 2030</li>
+              <li>Pan-India presence across all 28 states</li>
+              <li>Carbon-neutral agricultural supply chain</li>
+              <li>Bridging tech innovation with traditional farming</li>
+            </ul>
+          </div>
+        </div>
+        <div class="values-row">
+          <div class="val-item1 rv d1"><div class="val-icon"><img src="images/4.png" alt="Sustainability"></div><div class="val-title">Sustainability</div><div class="val-desc">Every product is designed with the earth's long-term health in mind</div></div>
+          <div class="val-item2 rv d2"><div class="val-icon"><img src="images/3.png" alt="Innovation"></div><div class="val-title">Innovation</div><div class="val-desc">Blending cutting-edge agri-tech with centuries of farming wisdom</div></div>
+          <div class="val-item3 rv d3"><div class="val-icon"><img src="images/2.png" alt="Farmer-First"></div><div class="val-title">Farmer-First</div><div class="val-desc">Every decision begins and ends with the welfare of our farmers</div></div>
+          <div class="val-item4 rv d4"><div class="val-icon"><img src="images/11.png" alt="Stewardship"></div><div class="val-title">Stewardship</div><div class="val-desc">Protecting soil, water and biodiversity for future generations</div></div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div><!-- /page-about -->
+
+<!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+<footer>
+  <div class="ft-inner">
+    <div class="ft-grid">
+      <div class="ft-main">
+        <div class="ft-header">
+<div class="ft-logo-mark"><img src="images/logo.png" alt="ThulirDhara Logo"></div>
+          <div class="ft-brand">Thulir Dhara</div>
+        </div>
+        <div class="ft-tagline">"Nature Driven · Farmer Focused · Future Ready"</div>
+        <div class="ft-desc">Empowering sustainable agriculture through innovative eco-friendly solutions across India.</div>
+      </div>
+      <div class="image-container" >
+         <img src="images/po3.png" class="img img-right img-medium" style="right: 7%; transform: translateY(10%);">
+      </div>
+      <div class="ft-col">
+        <h4>Quick Links</h4>
+        <div class="ft-links">
+          <a onclick="showPage('home')">Home</a>
+          <a onclick="showPage('products')">Products</a>
+          <a onclick="showPage('about')">About Us</a>
+          <a href="#">Sustainability</a>
+          <a href="#">Blog</a>
+        </div>
+      </div>
+      <div class="ft-col">
+        <h4>Contact</h4>
+        <div class="ft-ci"><img src="images/email.png" alt="Email" class="icon-all"> thulirdhara.innovation@gmail.com</div>
+        <div class="ft-ci"><img src="images/telephone.png" alt="Phone" class="icon-all"> +91 9488066420</div>
+        <div class="ft-ci"><img src="images/location (1).png" alt="Location" class="icon-all"> Madurai, Tamil Nadu, India</div>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <div class="ft-copy" style="font-size: 1.2rem;">© 2026 ThulirDhara. All rights reserved. | Founder: Srinivasn T</div>
+      <!-- <div class="ft-social">
+        <a class="soc" href="#">tw</a>
+        <a class="soc" href="#">ink</a>
+      </div> -->
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ══════════════════════════════════════
+   PRODUCT DATA
+══════════════════════════════════════ */
+const allProds = [
+  {
+    name: 'Bio Mulch Film',
+    
+    img: 'images/film.jpg',
+    desc: 'Biodegradable mulch film for sustainable farming.',
+    cat: 'Mulching',
+    problem: 'Conventional plastic mulch films persist in soil for decades, releasing microplastics and toxic chemicals that degrade soil health, harm beneficial microorganisms, and create long-term environmental contamination.',
+    solution: 'Our Bio Mulch Film is 100% biodegradable, breaking down naturally into water and CO₂ within 2 seasons. It retains soil moisture, controls weeds, and regulates temperature — all while leaving zero harmful residue.',
+    points: [
+      { icon: '💧', title: 'Moisture Retention', desc: 'Reduces irrigation needs by up to 40% by locking soil moisture' },
+      { icon: '🌿', title: '100% Biodegradable', desc: 'Breaks down naturally in soil — no removal, no waste, no pollution' },
+      { icon: '🌡️', title: 'Soil Temperature', desc: 'Regulates root-zone temperature for faster, healthier crop growth' },
+    ]
+  },
+  {
+    name: 'Premium Seeds Pack',
+   
+    img: 'images/seed.webp',
+    desc: 'High-yield certified organic seeds.',
+    cat: 'Seeds',
+    problem: 'Hybrid and GMO seeds require heavy chemical inputs, are non-renewable, and reduce biodiversity. Farmers face increasing dependency on seed companies and lose the ability to save seeds for the next season.',
+    solution: 'Our open-pollinated, certified organic seeds are bred for Tamil Nadu\'s climate. High germination rates (95%+), adaptable to local soil conditions, and fully renewable — you can save seeds season after season.',
+    points: [
+      { icon: '🧬', title: '95%+ Germination', desc: 'Lab-certified germination rates far above industry average' },
+      { icon: '🌍', title: 'Climate Adapted', desc: 'Specifically bred for Tamil Nadu\'s heat, humidity and soil' },
+      { icon: '♻️', title: 'Seed Saveable', desc: 'Open-pollinated varieties you can harvest and replant each season' },
+    ]
+  },
+  {
+    name: 'Greenhouse Film',
+    
+    img: 'images/green.webp',
+    desc: 'UV-protected greenhouse covering.',
+    cat: 'Protection',
+    problem: 'Ordinary polyethylene films degrade rapidly under Indian sunlight, losing clarity and structural integrity within a single season. Inferior films allow harmful UV, reducing crop quality and film lifespan.',
+    solution: 'Our multi-layer co-extruded greenhouse film provides 3–5 year durability with IR blocking, anti-drip, and diffused light technology for 15–20% better light utilization compared to standard films.',
+    points: [
+      { icon: '☀️', title: '3–5 Year Life', desc: 'UV-stabilized multi-layer construction for extreme Indian climate' },
+      { icon: '💡', title: 'Diffused Light', desc: '15–20% better light distribution eliminates hot spots' },
+      { icon: '💧', title: 'Anti-Drip', desc: 'Special coating prevents condensation drip that causes fungal disease' },
+    ]
+  },
+];
+
+/* ══════════════════════════════════════
+   SPLASH SCREEN ENTER ANIMATION
+══════════════════════════════════════ */
+function enterSite() {
+  const wrap  = document.getElementById('splashLogoWrap');
+  const name  = document.getElementById('splashName');
+  const tag   = document.getElementById('splashTagline');
+  const btn   = document.getElementById('splashBtn');
+  const splash = document.getElementById('splash');
+  const header = document.getElementById('hdr');
+
+  // Fade out text & button immediately
+  name.classList.add('hide');
+  tag.classList.add('hide');
+  btn.classList.add('hide');
+
+  // After a brief pause, fly the logo to header position
+  setTimeout(() => {
+    wrap.classList.add('fly');
+  }, 180);
+
+  // Show header after short delay
+  setTimeout(() => {
+    header.style.opacity = '1';
+  }, 800);
+
+  // Begin splash fade-out
+  splash.classList.add('fade-out');
+
+  // Remove splash from DOM after animation completes
+  setTimeout(() => {
+    splash.style.display = 'none';
+  }, 1300);
+}
+
+// Allow ESC to close splash (skip intro)
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    const splash = document.getElementById('splash');
+    if (splash && splash.style.display !== 'none') {
+      splash.style.animation = 'splashFadeOut .3s ease forwards';
+      setTimeout(() => splash.style.display = 'none', 320);
+    }
+  }
+});
+
+/* ══════════════════════════════════════
+   PRODUCT MODAL
+══════════════════════════════════════ */
+function openModal(idx) {
+  const p = allProds[idx];
+  const box = document.getElementById('pmBox');
+
+  box.innerHTML = `
+    <button class="pm-close" onclick="closeModal()">×</button>
+
+    <div class="pm-head">
+      <div class="pm-icon-box">
+        <img class="pm-product-img" src="${p.img}" alt="${p.name}">
+      </div>
+      <div>
+        <div class="pm-badge">${p.cat}</div>
+        <div class="pm-title">${p.name}</div>
+        <div class="pm-short">${p.desc}</div>
+      </div>
+    </div>
+
+    <div class="pm-body">
+      <div class="pm-block problem">
+        <div class="pm-block-label">⚠️ The Problem</div>
+        <p>${p.problem}</p>
+      </div>
+      <div class="pm-block solution">
+        <div class="pm-block-label">✅ Our Solution</div>
+        <p>${p.solution}</p>
+      </div>
+
+      <div class="pm-points">
+        <div class="pm-points-label">⭐ 3 Key Benefits</div>
+        <div class="pm-points-grid">
+          ${p.points.map(pt => `
+            <div class="pm-point">
+              <div class="pm-point-icon">${pt.icon}</div>
+              <div class="pm-point-title">${pt.title}</div>
+              <div class="pm-point-desc">${pt.desc}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+
+      <div class="pm-cta">
+        <button class="pm-btn-close2" onclick="closeModal()">← Back</button>
+        <button class="pm-btn-buy">🛒 Enquire Now</button>
+      </div>
+    </div>
+  `;
+
+  const modal = document.getElementById('prodModal');
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  const modal = document.getElementById('prodModal');
+  const box = document.getElementById('pmBox');
+  box.style.animation = 'none';
+  box.style.transform = 'translateY(40px) scale(.97)';
+  box.style.opacity = '0';
+  box.style.transition = 'all .3s ease';
+  setTimeout(() => {
+    modal.classList.remove('open');
+    box.style.transform = '';
+    box.style.opacity = '';
+    box.style.transition = '';
+    document.body.style.overflow = '';
+  }, 300);
+}
+
+// Close modal on backdrop click
+document.getElementById('prodModal').addEventListener('click', e => {
+  if (e.target === document.getElementById('prodModal')) closeModal();
+});
+
+// Close modal on ESC (when modal is open)
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && document.getElementById('prodModal').classList.contains('open')) {
+    closeModal();
+  }
+});
+
+/* ══════════════════════════════════════
+   HEADER — solid on scroll
+══════════════════════════════════════ */
+window.addEventListener('scroll', () => {
+  document.getElementById('hdr').classList.toggle('solid', window.scrollY > 60);
+});
+
+/* ══════════════════════════════════════
+   PAGE ROUTING
+══════════════════════════════════════ */
+function showPage(p) {
+  document.querySelectorAll('.page').forEach(el => el.classList.remove('on'));
+  const target = document.getElementById('page-' + p);
+  if (target) target.classList.add('on');
+
+  document.querySelectorAll('.nl').forEach(n => n.classList.remove('on'));
+  const ni = document.getElementById('n-' + p);
+  if (ni) ni.classList.add('on');
+
+  // Don't scroll to top - preserve scroll position
+  setTimeout(triggerReveal, 150);
+  if (p === 'products') renderProducts();
+}
+
+/* ══════════════════════════════════════
+   MOBILE MENU
+══════════════════════════════════════ */
+function toggleMob() {
+  const m = document.getElementById('mobNav');
+  m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
+}
+
+/* ══════════════════════════════════════
+   SCROLL REVEAL
+══════════════════════════════════════ */
+function triggerReveal() {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); }
+    });
+  }, { threshold: .1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.page.on .rv, .page.on .rv-l, .page.on .rv-r').forEach(el => {
+    el.classList.remove('on');
+    obs.observe(el);
+  });
+}
+triggerReveal();
+window.addEventListener('scroll', triggerReveal);
+
+/* ══════════════════════════════════════
+   PRODUCTS RENDER
+══════════════════════════════════════ */
+function renderProducts(f = '') {
+  const g = document.getElementById('pGrid');
+  if (!g) return;
+  const fl = allProds.filter(p =>
+    p.name.toLowerCase().includes(f.toLowerCase()) ||
+    p.cat.toLowerCase().includes(f.toLowerCase())
+  );
+  g.innerHTML = fl.map((p, i) => `
+    <div class="prod-card rv d${(i % 3) + 1}" onclick="openModal(${i})">
+      <div class="prod-img"><img class="prod-ing" src="${p.img}" alt="${p.name}"><div class="prod-badge">${p.cat}</div></div>
+      <div class="prod-body">
+        <div class="prod-name">${p.name}</div>
+        <div class="prod-desc">${p.desc}</div>
+        <div class="prod-foot">
+          <button class="prod-btn" onclick="event.stopPropagation();openModal(${i})">View Details</button>
+        </div>
+      </div>
+    </div>`).join('');
+  setTimeout(triggerReveal, 80);
+}
+
+function filterP() { renderProducts(document.getElementById('psearch').value); }
+</script>
+</body>
+</html>
