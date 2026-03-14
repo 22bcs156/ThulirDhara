@@ -586,7 +586,7 @@ background-image: url('images/bgmain.jpeg');
 .f-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,var(--c3),var(--c4));transform:scaleY(0);transform-origin:top;transition:transform .4s}
 .f-card:hover{border-color:rgba(29,162,126,.3);transform:translateX(6px)}
 .f-card:hover::before{transform:scaleY(1)}
-.f-av{width:72px;height:72px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--c2),var(--c3));border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:2rem}
+.f-av{width:72px;height:72px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:2rem}
 .f-name{font-family:'Bodoni Moda',serif;font-size:1.3rem;color:var(--white);margin-bottom:.2rem}
 .f-role{font-size:.75rem;color:var(--c4);font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.7rem}
 .f-bio{font-size:.85rem;color:var(--muted);line-height:1.7}
@@ -991,14 +991,7 @@ footer{background:rgba(10,35,28,.88);border-top:1px solid var(--border);padding:
       <img src="images/bb1.png" class="img img-right img-medium">
       </div>
     </div>
-    <div class="video-bgg">
-
-    <h2 class="video-title">Journey Video</h2>
-    <video class="bg-video" controls>
-        <source src="images/video.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-    </div>
+  <div class="video-bgg"> <h2 class="video-title">Journey Video</h2> <video class="bg-video" controls> <source src="images/video.mp4" type="video/mp4"> Your browser does not support the video tag. </video> </div>
 
     <!-- MISSION & VISION -->
     <section class="sec" id="mv">
@@ -1097,16 +1090,16 @@ footer{background:rgba(10,35,28,.88);border-top:1px solid var(--border);padding:
             </div>
           </div>
           <div class="prod-card rv d2" onclick="openModal(1)">
-<div class="prod-img"><img class="prod-ing" src="images/seed.webp" alt="Premium Seeds"><div class="prod-badge">Seeds</div></div>
+<div class="prod-img"><img class="prod-ing" src="images/green.webp" alt="Organic Window Film"><div class="prod-badge">Film</div></div>
             <div class="prod-body">
 
-              <div class="prod-name">Premium Seeds Pack</div>
-              <div class="prod-desc">High-yield certified organic seeds.</div>
+              <div class="prod-name">Organic Window Film</div>
+              <div class="prod-desc">Advanced bio-based solar protection.</div>
               <div class="prod-foot"><button class="prod-btn" onclick="event.stopPropagation();openModal(1)">View Details</button></div>
             </div>
           </div>
           <div class="prod-card rv d3" onclick="openModal(2)">
-<div class="prod-img"><img class="prod-ing" src="images/green.webp" alt="Greenhouse Film"><div class="prod-badge">Protection</div></div>
+<div class="prod-img"><img class="prod-ing" src="images/seed.jpg" alt="Greenhouse Film"><div class="prod-badge">Protection</div></div>
             <div class="prod-body">
 
               <div class="prod-name">GreenHouse Film </div>
@@ -1246,11 +1239,16 @@ footer{background:rgba(10,35,28,.88);border-top:1px solid var(--border);padding:
           </div>
           <div class="founders-col rv-r">
             <div class="f-card">
-              <div class="f-av">👨‍🌾</div>
+              <div class="f-av"><img src="images/founder.jpeg" style="width:80px;
+    height: 72px;;     
+    object-fit:contain;
+    margin-right:8px;
+    vertical-align:middle;
+    border-radius: 50%;"></div>
               <div>
                 <div class="f-name">Srinivasan T</div>
                 <div class="f-role">Founder</div>
-                <div class="f-bio">Visionary leader who transformed Indian agriculture through eco-friendly innovation, empowering thousands of farmers nationwide.</div>
+                <div class="f-bio">A creative leader who believes in helping our farmers grow healthy food while taking care of the earth.</div>
               </div>
             </div>
             <!-- <div class="f-card">
@@ -1421,24 +1419,24 @@ const allProds = [
       { icon: '🌡️', title: 'Soil Temperature', desc: 'Regulates root-zone temperature for faster, healthier crop growth' },
     ]
   },
-  {
-    name: 'Premium Seeds Pack',
-   
-    img: 'images/seed.webp',
-    desc: 'High-yield certified organic seeds.',
-    cat: 'Seeds',
-    problem: 'Hybrid and GMO seeds require heavy chemical inputs, are non-renewable, and reduce biodiversity. Farmers face increasing dependency on seed companies and lose the ability to save seeds for the next season.',
-    solution: 'Our open-pollinated, certified organic seeds are bred for Tamil Nadu\'s climate. High germination rates (95%+), adaptable to local soil conditions, and fully renewable — you can save seeds season after season.',
-    points: [
-      { icon: '🧬', title: '95%+ Germination', desc: 'Lab-certified germination rates far above industry average' },
-      { icon: '🌍', title: 'Climate Adapted', desc: 'Specifically bred for Tamil Nadu\'s heat, humidity and soil' },
-      { icon: '♻️', title: 'Seed Saveable', desc: 'Open-pollinated varieties you can harvest and replant each season' },
-    ]
-  },
-  {
-    name: 'Greenhouse Film',
-    
+ {
+    name: 'Organic Window Film',
     img: 'images/green.webp',
+    desc: 'Advanced bio-based solar protection.',
+    cat: 'Insulation',
+    problem: 'Standard synthetic window films use petroleum-based plastics and toxic adhesives that off-gas VOCs. They often crack under intense sun, lose clarity, and contribute to landfill waste at the end of their lifecycle.',
+    solution: 'Our organic window film is crafted from plant-derived polymers and natural resins. It provides 99% UV rejection and superior heat insulation without chemical off-gassing, keeping your interiors cool while remaining fully biodegradable and carbon-neutral.',
+    points: [
+      { icon: '🌿', title: 'Zero VOCs', desc: 'Plant-based adhesive ensures no toxic fumes or chemical odors in your home' },
+      { icon: '☀️', title: 'Thermal Shield', desc: 'Blocks up to 85% of infrared heat, drastically reducing air conditioning costs' },
+      { icon: '♻️', title: 'Eco-Degradable', desc: 'The world’s first high-performance film that decomposes safely at end-of-life' },
+    ]
+}
+,
+  {
+    name: ' GreenHouse Film',
+    
+    img: 'images/seed.jpg',
     desc: 'UV-protected greenhouse covering.',
     cat: 'Protection',
     problem: 'Ordinary polyethylene films degrade rapidly under Indian sunlight, losing clarity and structural integrity within a single season. Inferior films allow harmful UV, reducing crop quality and film lifespan.',
